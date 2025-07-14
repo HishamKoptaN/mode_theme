@@ -19,8 +19,8 @@ class ModeTheme extends StatelessWidget {
         builder: (context, state) => builder(
           context: context,
           themeMode: state.mode,
-          lightMode:state.mode.,
-          darkMode: ThemeMode.dark,
+          lightMode: lightTheme(),
+          darkMode: darkTheme(),
         ),
       ),
     );
