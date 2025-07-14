@@ -1,0 +1,26 @@
+name: mode_theme
+description: "A new Flutter package project."
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ^3.8.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  hydrated_bloc: ^10.0.0
+  flutter_screenutil: ^5.9.3
+  flutter_bloc: ^9.0.0
+  path_provider: ^2.1.5
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.7
+  freezed: ^2.5.7
+  injectable_generator: ^2.3.0
+  json_serializable: ^6.7.1
+  flutter_test:
+   sdk: flutter
+flutter:
