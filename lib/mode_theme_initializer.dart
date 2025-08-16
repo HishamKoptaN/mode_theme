@@ -20,12 +20,9 @@ Future<void> initializeModeThemeApp(
     ),
   );
 }
-
 class _ModeThemeRoot extends StatelessWidget {
   final Widget Function(BuildContext) builder;
-
   const _ModeThemeRoot(this.builder);
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

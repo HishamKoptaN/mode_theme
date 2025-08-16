@@ -1,55 +1,30 @@
 import 'package:flutter/material.dart';
+import '../components/card_theme.dart';
 import '../components/dialog_theme_data.dart';
+import '../components/drawer_theme_data.dart';
 import '../components/dropdown_menu_theme_data.dart';
+import '../components/page_transitions_theme.dart';
+import '../components/scrollbar_theme_data.dart';
 import '../components/snackbar_theme.dart';
 import '../components/switch_theme_data.dart';
 import '../../mode_theme.dart';
-import '../core/text_theme.dart';
+import '../core/app_fonts.dart';
+import '../core/app_theme_tokens.dart';
 
-ThemeData lightTheme() {
-  final colorScheme = ColorScheme.fromSeed(
-    seedColor: Colors.blue,
-    brightness: Brightness.light,
-    // //اللون الأساسي للتطبيق (مثل أزرار، شريط التطبيقات)
-    // primary: LightColors.primary,
-    // // اللون المستخدم فوق اللون primary (مثل النص داخل زر)
-    // onPrimary: LightColors.onPrimary,
-    // // خلفيات ثانوية مرتبطة بـ primary (بطاقات، حاويات)
-    // primaryContainer: LightColors.primaryContainer,
-    // // النص أو الأيقونات التي تظهر فوق primaryContainer
-    // onPrimaryContainer: LightColors.onPrimaryContainer,
-    // // اللون الثانوي (مساعد لـ primary)
-    // secondary: LightColors.secondary,
-    // // اللون الذي يظهر فوق secondary (نص أو أيقونات)
-    // onSecondary: Colors.white,
-    // error: LightColors.error,
-    // onError: Colors.white,
-    // // سطح عام (بطاقات، خلفيات نوافذ، dialogs)
-    // surface: LightColors.surface,
-    // // النص أو الأيقونات فوق surface
-    // onSurface: LightColors.onSurface,
-    // outline: LightColors.outline,
-  );
+ThemeData lightTheme({required ColorScheme colorScheme}) {
   final textTheme = getLightTextTheme(colorScheme: colorScheme);
   return ThemeData(
     colorScheme: colorScheme,
     brightness: Brightness.light,
-    fontFamily: 'Cairo',
+    fontFamily: AppFonts.primary,
     useMaterial3: true,
     primaryColor: colorScheme.primary,
     scaffoldBackgroundColor: colorScheme.surface,
     cardColor: colorScheme.surface,
-    iconTheme: IconThemeData(color: colorScheme.onSurface, size: 24),
+    iconTheme: AppThemeTokens.iconTheme(colorScheme.onSurface),
     textTheme: textTheme,
     appBarTheme: appBarTheme(colorScheme: colorScheme),
-    drawerTheme: DrawerThemeData(
-      backgroundColor: colorScheme.surface,
-      surfaceTintColor: Colors.transparent,
-      elevation: 8,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.horizontal(right: Radius.circular(24)),
-      ),
-    ),
+    drawerTheme: drawerThemeData(colorScheme),
     dividerTheme: DividerThemeData(color: colorScheme.outline, thickness: 1),
     bottomSheetTheme: bottomSheetTheme(colorScheme: colorScheme),
     dialogTheme: dialogThemeData(
@@ -57,13 +32,7 @@ ThemeData lightTheme() {
       textTheme: textTheme,
     ),
     checkboxTheme: checkboxTheme(colorScheme: colorScheme),
-    cardTheme: CardThemeData(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
-    ),
+    cardTheme: cardThemeData(colorScheme: colorScheme),
     floatingActionButtonTheme: fabTheme(
       colorScheme: colorScheme,
       textTheme: textTheme,
@@ -92,23 +61,15 @@ ThemeData lightTheme() {
     primaryColorDark: colorScheme.primary,
     dividerColor: colorScheme.outline,
     shadowColor: colorScheme.shadow,
-    splashColor: colorScheme.primary,
-    hintColor: colorScheme.onSurfaceVariant,
+    splashColor: DesignTokens.splash(colorScheme),
+    hintColor: DesignTokens.hint(colorScheme),
     hoverColor: colorScheme.primary,
     focusColor: colorScheme.primary,
     disabledColor: colorScheme.onSurface,
     primaryIconTheme: IconThemeData(color: colorScheme.onPrimary),
     primaryTextTheme: textTheme,
-    pageTransitionsTheme: const PageTransitionsTheme(
-      builders: {
-        TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-      },
-    ),
-    scrollbarTheme: ScrollbarThemeData(
-      thumbColor: WidgetStateProperty.all(colorScheme.primary),
-      trackColor: WidgetStateProperty.all(colorScheme.onSurface),
-    ),
+    pageTransitionsTheme: customPageTransitionsTheme,
+    scrollbarTheme: scrollbarThemeData(colorScheme),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     splashFactory: InkRipple.splashFactory,

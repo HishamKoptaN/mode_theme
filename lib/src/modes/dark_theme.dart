@@ -1,42 +1,27 @@
 import 'package:flutter/material.dart';
+import '../components/card_theme.dart';
 import '../components/dialog_theme_data.dart';
+import '../components/drawer_theme_data.dart';
 import '../components/dropdown_menu_theme_data.dart';
+import '../components/page_transitions_theme.dart';
+import '../components/scrollbar_theme_data.dart';
 import '../components/snackbar_theme.dart';
 import '../components/switch_theme_data.dart';
 import '../../mode_theme.dart';
+import '../core/app_divider.dart';
+import '../core/app_fonts.dart';
+import '../core/app_theme_tokens.dart';
 
-ThemeData darkTheme() {
-  final colorScheme = ColorScheme.fromSeed(
-    seedColor: Colors.blue,
-    brightness: Brightness.dark,
-    // primary: DarkColors.primary,
-    // onPrimary: DarkColors.onPrimary,
-    // primaryContainer: DarkColors.primaryContainer,
-    // onPrimaryContainer: DarkColors.onPrimaryContainer,
-    // secondary: DarkColors.secondary,
-    // onSecondary: Colors.black,
-    // error: DarkColors.error,
-    // onError: Colors.black,
-    // surface: DarkColors.surface,
-    // onSurface: DarkColors.onSurface,
-    // outline: DarkColors.outline,
-  );
-  final textTheme = getLightTextTheme(colorScheme: colorScheme);
+ThemeData darkTheme({required ColorScheme colorScheme}) {
+  final textTheme = getDarkTextTheme(colorScheme: colorScheme);
   return ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    fontFamily: 'Cairo',
+    fontFamily: AppFonts.primary,
     scaffoldBackgroundColor: colorScheme.surface,
     colorScheme: colorScheme,
-    textTheme: getDarkTextTheme(colorScheme: colorScheme),
-    drawerTheme: DrawerThemeData(
-      backgroundColor: colorScheme.surface,
-      surfaceTintColor: Colors.transparent,
-      elevation: 8,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.horizontal(right: Radius.circular(24)),
-      ),
-    ),
+    textTheme: textTheme,
+    drawerTheme: drawerThemeData(colorScheme),
     // ! Buttons
     elevatedButtonTheme: elevatedButtonTheme(
       colorScheme: colorScheme,
@@ -48,13 +33,7 @@ ThemeData darkTheme() {
     ),
     appBarTheme: appBarTheme(colorScheme: colorScheme),
     bottomSheetTheme: bottomSheetTheme(colorScheme: colorScheme),
-    cardTheme: CardThemeData(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
-    ),
+    cardTheme: cardThemeData(colorScheme: colorScheme),
     checkboxTheme: checkboxTheme(colorScheme: colorScheme),
     snackBarTheme: snackBarTheme(
       textTheme: textTheme,
@@ -68,22 +47,28 @@ ThemeData darkTheme() {
     // ! Colors
     canvasColor: colorScheme.surface,
     cardColor: colorScheme.surface,
-    dialogBackgroundColor: colorScheme.surface,
     primaryColor: colorScheme.primary,
     dividerColor: colorScheme.outline,
     shadowColor: colorScheme.shadow,
-    splashColor: colorScheme.primary.withOpacity(0.12),
-    hintColor: colorScheme.onSurface.withOpacity(0.6),
-    iconTheme: IconThemeData(color: colorScheme.onSurface, size: 24),
+    splashColor: DesignTokens.splash(colorScheme),
+    hintColor: DesignTokens.hint(colorScheme),
+    iconTheme: AppThemeTokens.iconTheme(colorScheme.onSurface),
+    // iconTheme: IconThemeData(color: colorScheme.onSurface, size: 24),
     dialogTheme: dialogThemeData(
       colorScheme: colorScheme,
       textTheme: textTheme,
     ),
+    pageTransitionsTheme: customPageTransitionsTheme,
+    scrollbarTheme: scrollbarThemeData(colorScheme),
     floatingActionButtonTheme: fabTheme(
       colorScheme: colorScheme,
       textTheme: textTheme,
     ),
-    dividerTheme: DividerThemeData(color: colorScheme.outline, thickness: 1),
+
+    dividerTheme: DividerThemeData(
+      color: colorScheme.outline,
+      thickness: AppDivider.thickness,
+    ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 }

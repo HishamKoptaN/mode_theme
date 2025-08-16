@@ -4,7 +4,14 @@ import 'theme_event.dart';
 import 'theme_state.dart';
 
 class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
-  ThemeBloc() : super(ThemeState.light()) {
+  ThemeBloc({ThemeMode? initial})
+    : super(
+        initial == ThemeMode.dark
+            ? ThemeState.dark()
+            : initial == ThemeMode.light
+            ? ThemeState.light()
+            : ThemeState(mode: ThemeMode.system),
+      ) {
     on<ThemeEvent>((event, emit) {
       event.map(
         toggleTheme: (_) {
@@ -16,16 +23,23 @@ class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
         },
         setLight: (_) => emit(ThemeState.light()),
         setDark: (_) => emit(ThemeState.dark()),
-        setMode: (v) {},
+        setMode: (v) => emit(ThemeState(mode: v.mode)),
       );
     });
   }
-
   @override
   ThemeState? fromJson(Map<String, dynamic> json) {
     final modeStr = json['mode'] as String?;
-    if (modeStr == null) return null;
-    return modeStr == 'dark' ? ThemeState.dark() : ThemeState.light();
+    switch (modeStr) {
+      case 'light':
+        return ThemeState.light();
+      case 'dark':
+        return ThemeState.dark();
+      case 'system':
+        return ThemeState(mode: ThemeMode.system);
+      default:
+        return null;
+    }
   }
 
   @override

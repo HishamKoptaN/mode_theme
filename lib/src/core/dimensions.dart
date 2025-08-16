@@ -3,7 +3,6 @@ class AppDimensions {
   static const double padding = 16;
   static const double buttonHeight = 48;
 }
-
 class AppTextSizes {
   static const double title = 20;
   static const double subtitle = 16;

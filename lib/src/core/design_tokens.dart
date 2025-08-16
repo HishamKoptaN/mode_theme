@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DesignTokens {
+  static const double drawerElevation = 8;
+  static const BorderRadius drawerRadius = BorderRadius.horizontal(
+    right: Radius.circular(24),
+  );
   static const BorderRadius defaultRadius = BorderRadius.all(
     Radius.circular(12),
   );
@@ -32,10 +36,15 @@ class DesignTokens {
   // Disabled fill color
   static Color disabledFill(ColorScheme colorScheme) =>
       colorScheme.onSurface.withAlpha((0.38 * 255).toInt());
-
   // Default fill color
   static Color defaultFill(ColorScheme colorScheme) =>
       colorScheme.onSurface.withAlpha((0.6 * 255).toInt());
   static Color applyOpacity(Color color, double opacity) =>
       color.withAlpha((opacity * 255).round());
+  static Color splash(ColorScheme colorScheme) =>
+      applyOpacity(colorScheme.primary, 0.12);
+  static Color hint(ColorScheme colorScheme) =>
+      applyOpacity(colorScheme.onSurface, 0.6);
+  static Color disabled(ColorScheme colorScheme) =>
+      applyOpacity(colorScheme.onSurface, 0.38);
 }
