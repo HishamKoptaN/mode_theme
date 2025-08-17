@@ -1,2 +1,2 @@
-library mode_theme;
 export 'src/exports.dart';
+export 'mode_theme_initializer.dart';
