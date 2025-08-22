@@ -9,30 +9,45 @@ import '../components/snackbar_theme.dart';
 import '../components/switch_theme_data.dart';
 import '../../mode_theme.dart';
 import '../core/app_fonts.dart';
-import '../core/app_theme_tokens.dart';
 
-ThemeData lightTheme({required ColorScheme colorScheme}) {
-  final textTheme = getLightTextTheme(colorScheme: colorScheme);
+ThemeData lightTheme({
+  required ColorScheme colorScheme,
+  required DesignTokens designTokens,
+  required TextStyle baseTextStyle,
+}) {
+  final textTheme = getLightTextTheme(
+    colorScheme: colorScheme,
+    baseTextStyle: baseTextStyle,
+  );
   return ThemeData(
     colorScheme: colorScheme,
     brightness: Brightness.light,
     fontFamily: AppFonts.primary,
     useMaterial3: true,
-    primaryColor: colorScheme.primary,
-    scaffoldBackgroundColor: colorScheme.surface,
-    cardColor: colorScheme.surface,
-    iconTheme: AppThemeTokens.iconTheme(colorScheme.onSurface),
+    appBarTheme: appBarTheme(
+      colorScheme: colorScheme,
+      designTokens: designTokens,
+    ),
+    iconTheme: IconThemeData(color: colorScheme.onSurface, size: 24),
     textTheme: textTheme,
-    appBarTheme: appBarTheme(colorScheme: colorScheme),
-    drawerTheme: drawerThemeData(colorScheme),
+    drawerTheme: drawerThemeData(
+      colorScheme: colorScheme,
+      designTokens: designTokens,
+    ),
     dividerTheme: DividerThemeData(color: colorScheme.outline, thickness: 1),
     bottomSheetTheme: bottomSheetTheme(colorScheme: colorScheme),
     dialogTheme: dialogThemeData(
       colorScheme: colorScheme,
       textTheme: textTheme,
     ),
-    checkboxTheme: checkboxTheme(colorScheme: colorScheme),
-    cardTheme: cardThemeData(colorScheme: colorScheme),
+    checkboxTheme: checkboxTheme(
+      colorScheme: colorScheme,
+      designTokens: designTokens,
+    ),
+    cardTheme: cardThemeData(
+      colorScheme: colorScheme,
+      designTokens: designTokens,
+    ),
     floatingActionButtonTheme: fabTheme(
       colorScheme: colorScheme,
       textTheme: textTheme,
@@ -44,29 +59,38 @@ ThemeData lightTheme({required ColorScheme colorScheme}) {
     inputDecorationTheme: inputDecorationTheme(
       colorScheme: colorScheme,
       textTheme: textTheme,
+      designTokens: designTokens,
     ),
     // ! Buttons
     elevatedButtonTheme: elevatedButtonTheme(
       colorScheme: colorScheme,
       textTheme: textTheme,
+      designTokens: designTokens,
     ),
     dropdownMenuTheme: dropdownMenuThemeData(
       colorScheme: colorScheme,
       textTheme: textTheme,
+      designTokens: designTokens,
     ),
-    switchTheme: switchThemeData(colorScheme: colorScheme),
+    switchTheme: switchThemeData(
+      colorScheme: colorScheme,
+      designTokens: designTokens,
+    ),
     // ! Colors
+    primaryColor: colorScheme.primary,
+    scaffoldBackgroundColor: colorScheme.surface,
+    cardColor: colorScheme.surface,
     canvasColor: colorScheme.surface,
     primaryColorLight: colorScheme.primaryContainer,
     primaryColorDark: colorScheme.primary,
     dividerColor: colorScheme.outline,
     shadowColor: colorScheme.shadow,
-    splashColor: DesignTokens.splash(colorScheme),
-    hintColor: DesignTokens.hint(colorScheme),
+    splashColor: designTokens.splash(colorScheme),
+    hintColor: designTokens.hint(colorScheme),
     hoverColor: colorScheme.primary,
     focusColor: colorScheme.primary,
     disabledColor: colorScheme.onSurface,
-    primaryIconTheme: IconThemeData(color: colorScheme.onPrimary),
+    primaryIconTheme: IconThemeData(color: colorScheme.primary),
     primaryTextTheme: textTheme,
     pageTransitionsTheme: customPageTransitionsTheme,
     scrollbarTheme: scrollbarThemeData(colorScheme),

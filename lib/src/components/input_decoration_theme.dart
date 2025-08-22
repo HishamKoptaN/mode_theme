@@ -5,10 +5,11 @@ import '../core/design_tokens.dart';
 InputDecorationTheme inputDecorationTheme({
   required ColorScheme colorScheme,
   required TextTheme textTheme,
+  required DesignTokens designTokens,
 }) {
   OutlineInputBorder buildBorder(Color color, {double width = 1.0}) =>
       OutlineInputBorder(
-        borderRadius: DesignTokens.defaultRadius,
+        borderRadius: designTokens.defaultRadius,
         borderSide: BorderSide(color: color, width: width),
       );
   return InputDecorationTheme(
@@ -26,13 +27,14 @@ InputDecorationTheme inputDecorationTheme({
       color: colorScheme.onSurfaceVariant,
     ),
     errorStyle: textTheme.bodySmall?.copyWith(color: colorScheme.error),
-    border: buildBorder(colorScheme.outline),
+    // border: buildBorder(colorScheme.outline),
+    border: InputBorder.none,
     enabledBorder: buildBorder(colorScheme.outline),
     focusedBorder: buildBorder(colorScheme.primary, width: 1.5),
     errorBorder: buildBorder(colorScheme.error),
     focusedErrorBorder: buildBorder(colorScheme.error, width: 1.5),
     disabledBorder: buildBorder(
-      DesignTokens.applyOpacity(colorScheme.onSurface, 0.38),
+      designTokens.applyOpacity(colorScheme.onSurface, 0.38),
     ),
   );
 }

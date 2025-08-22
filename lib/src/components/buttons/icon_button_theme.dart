@@ -3,12 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/design_tokens.dart';
 import '../../core/dimensions.dart';
 
-IconButtonThemeData iconButtonTheme({required ColorScheme colorScheme}) {
+IconButtonThemeData iconButtonTheme({
+  required ColorScheme colorScheme,
+  required DesignTokens designTokens,
+}) {
   return IconButtonThemeData(
     style: ButtonStyle(
       iconColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.disabled)) {
-          return DesignTokens.applyOpacity(colorScheme.onSurface, 0.38);
+          return designTokens.applyOpacity(colorScheme.onSurface, 0.38);
         }
         return colorScheme.primary;
       }),
@@ -16,7 +19,7 @@ IconButtonThemeData iconButtonTheme({required ColorScheme colorScheme}) {
       padding: WidgetStateProperty.all(EdgeInsets.all(AppPadding.vertical.w)),
       minimumSize: WidgetStateProperty.all(Size(40.w, 40.h)),
       shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: DesignTokens.defaultRadius),
+        RoundedRectangleBorder(borderRadius: designTokens.defaultRadius),
       ),
     ),
   );

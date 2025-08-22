@@ -6,18 +6,19 @@ import '../../core/dimensions.dart';
 FilledButtonThemeData filledButtonTheme({
   required ColorScheme colorScheme,
   required TextTheme textTheme,
+  required DesignTokens designTokens,
 }) {
   return FilledButtonThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.disabled)) {
-          return DesignTokens.applyOpacity(colorScheme.onSurface, 0.12);
+          return designTokens.applyOpacity(colorScheme.onSurface, 0.12);
         }
         return colorScheme.primary;
       }),
       foregroundColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.disabled)) {
-          return DesignTokens.applyOpacity(colorScheme.onSurface, 0.38);
+          return designTokens.applyOpacity(colorScheme.onSurface, 0.38);
         }
         return colorScheme.onPrimary;
       }),
@@ -29,7 +30,7 @@ FilledButtonThemeData filledButtonTheme({
       ),
       textStyle: WidgetStateProperty.all(textTheme.labelLarge),
       shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: DesignTokens.defaultRadius),
+        RoundedRectangleBorder(borderRadius: designTokens.defaultRadius),
       ),
     ),
   );

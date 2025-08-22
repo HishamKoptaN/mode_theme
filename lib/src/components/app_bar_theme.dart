@@ -3,11 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../core/design_tokens.dart';
 
-AppBarTheme appBarTheme({required ColorScheme colorScheme}) {
+AppBarTheme appBarTheme({
+  required ColorScheme colorScheme,
+  required DesignTokens designTokens,
+}) {
   return AppBarTheme(
     backgroundColor: colorScheme.primary,
     foregroundColor: colorScheme.onPrimary,
-    elevation: DesignTokens.cardElevation,
+    elevation: designTokens.cardElevation,
     scrolledUnderElevation: 4,
     shadowColor: colorScheme.shadow,
     centerTitle: true,
@@ -15,7 +18,7 @@ AppBarTheme appBarTheme({required ColorScheme colorScheme}) {
     titleSpacing: 16.w,
     iconTheme: IconThemeData(color: colorScheme.onPrimary),
     actionsIconTheme: IconThemeData(
-      color: DesignTokens.applyOpacity(colorScheme.onPrimary, 0.9),
+      color: designTokens.applyOpacity(colorScheme.onPrimary, 0.9),
     ),
     titleTextStyle: TextStyle(
       fontSize: 20.sp,
@@ -24,7 +27,7 @@ AppBarTheme appBarTheme({required ColorScheme colorScheme}) {
     ),
     systemOverlayStyle: SystemUiOverlayStyle.light,
     shape: RoundedRectangleBorder(
-      borderRadius: DesignTokens.defaultRadiusOnlyBottom,
+      borderRadius: designTokens.defaultRadiusOnlyBottom,
     ),
   );
 }

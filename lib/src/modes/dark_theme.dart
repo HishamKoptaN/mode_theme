@@ -10,10 +10,16 @@ import '../components/switch_theme_data.dart';
 import '../../mode_theme.dart';
 import '../core/app_divider.dart';
 import '../core/app_fonts.dart';
-import '../core/app_theme_tokens.dart';
 
-ThemeData darkTheme({required ColorScheme colorScheme}) {
-  final textTheme = getDarkTextTheme(colorScheme: colorScheme);
+ThemeData darkTheme({
+  required ColorScheme colorScheme,
+  required DesignTokens designTokens,
+  required TextStyle baseTextStyle,
+}) {
+  final textTheme = getDarkTextTheme(
+    colorScheme: colorScheme,
+    baseTextStyle: baseTextStyle,
+  );
   return ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
@@ -21,28 +27,46 @@ ThemeData darkTheme({required ColorScheme colorScheme}) {
     scaffoldBackgroundColor: colorScheme.surface,
     colorScheme: colorScheme,
     textTheme: textTheme,
-    drawerTheme: drawerThemeData(colorScheme),
+    drawerTheme: drawerThemeData(
+      colorScheme: colorScheme,
+      designTokens: designTokens,
+    ),
     // ! Buttons
     elevatedButtonTheme: elevatedButtonTheme(
       colorScheme: colorScheme,
       textTheme: textTheme,
+      designTokens: designTokens,
     ),
     inputDecorationTheme: inputDecorationTheme(
       colorScheme: colorScheme,
       textTheme: textTheme,
+      designTokens: designTokens,
     ),
-    appBarTheme: appBarTheme(colorScheme: colorScheme),
+    appBarTheme: appBarTheme(
+      colorScheme: colorScheme,
+      designTokens: designTokens,
+    ),
     bottomSheetTheme: bottomSheetTheme(colorScheme: colorScheme),
-    cardTheme: cardThemeData(colorScheme: colorScheme),
-    checkboxTheme: checkboxTheme(colorScheme: colorScheme),
+    cardTheme: cardThemeData(
+      colorScheme: colorScheme,
+      designTokens: designTokens,
+    ),
+    checkboxTheme: checkboxTheme(
+      colorScheme: colorScheme,
+      designTokens: designTokens,
+    ),
     snackBarTheme: snackBarTheme(
       textTheme: textTheme,
       colorScheme: colorScheme,
     ),
-    switchTheme: switchThemeData(colorScheme: colorScheme),
+    switchTheme: switchThemeData(
+      colorScheme: colorScheme,
+      designTokens: designTokens,
+    ),
     dropdownMenuTheme: dropdownMenuThemeData(
       colorScheme: colorScheme,
       textTheme: textTheme,
+      designTokens: designTokens,
     ),
     // ! Colors
     canvasColor: colorScheme.surface,
@@ -50,9 +74,9 @@ ThemeData darkTheme({required ColorScheme colorScheme}) {
     primaryColor: colorScheme.primary,
     dividerColor: colorScheme.outline,
     shadowColor: colorScheme.shadow,
-    splashColor: DesignTokens.splash(colorScheme),
-    hintColor: DesignTokens.hint(colorScheme),
-    iconTheme: AppThemeTokens.iconTheme(colorScheme.onSurface),
+    splashColor: designTokens.splash(colorScheme),
+    hintColor: designTokens.hint(colorScheme),
+    // iconTheme: AppThemeTokens.iconTheme(colorScheme.onSurface),
     // iconTheme: IconThemeData(color: colorScheme.onSurface, size: 24),
     dialogTheme: dialogThemeData(
       colorScheme: colorScheme,
@@ -64,7 +88,6 @@ ThemeData darkTheme({required ColorScheme colorScheme}) {
       colorScheme: colorScheme,
       textTheme: textTheme,
     ),
-
     dividerTheme: DividerThemeData(
       color: colorScheme.outline,
       thickness: AppDivider.thickness,

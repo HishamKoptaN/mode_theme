@@ -6,12 +6,13 @@ import '../../core/dimensions.dart';
 TextButtonThemeData textButtonTheme({
   required ColorScheme colorScheme,
   required TextTheme textTheme,
+  required DesignTokens designTokens,
 }) {
   return TextButtonThemeData(
     style: ButtonStyle(
       foregroundColor: WidgetStateProperty.resolveWith((states) {
         return states.contains(WidgetState.disabled)
-            ? DesignTokens.applyOpacity(colorScheme.onSurface, 0.38)
+            ? designTokens.applyOpacity(colorScheme.onSurface, 0.38)
             : colorScheme.primary;
       }),
       padding: WidgetStateProperty.all(
@@ -23,7 +24,7 @@ TextButtonThemeData textButtonTheme({
       minimumSize: WidgetStateProperty.all(Size(100.w, 40.h)),
       textStyle: WidgetStateProperty.all(textTheme.labelLarge),
       shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: DesignTokens.defaultRadius),
+        RoundedRectangleBorder(borderRadius: designTokens.defaultRadius!),
       ),
     ),
   );

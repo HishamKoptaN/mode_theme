@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import '../../mode_theme.dart';
 
-CheckboxThemeData checkboxTheme({required ColorScheme colorScheme}) {
+CheckboxThemeData checkboxTheme({
+  required ColorScheme colorScheme,
+  required DesignTokens designTokens,
+}) {
   return CheckboxThemeData(
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.disabled)) {
-        return DesignTokens.disabledFill(colorScheme);
+        return designTokens.disabledFill(colorScheme);
       }
       if (states.contains(WidgetState.selected)) {
         return colorScheme.primary;
       }
-      return DesignTokens.defaultFill(colorScheme);
+      return designTokens.defaultFill(colorScheme);
     }),
     checkColor: WidgetStateProperty.all(colorScheme.onPrimary),
     overlayColor: WidgetStateProperty.all(
       colorScheme.primary.withAlpha((0.1 * 255).toInt()),
     ),
-    splashRadius: DesignTokens.splashRadius,
-    shape: RoundedRectangleBorder(borderRadius: DesignTokens.checkboxRadius),
-    side: DesignTokens.outline(colorScheme),
+    splashRadius: designTokens.splashRadius,
+    shape: RoundedRectangleBorder(borderRadius: designTokens.checkboxRadius),
+    side: designTokens.outline(colorScheme),
   );
 }

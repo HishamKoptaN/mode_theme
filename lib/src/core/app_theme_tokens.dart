@@ -5,12 +5,14 @@ import 'design_tokens.dart';
 import 'dimensions.dart';
 
 class AppThemeTokens {
-  static const radius = AppDimensions.radius;
-  static const padding = AppPadding.horizontal;
-  static const cardMargin = DesignTokens.cardMargin;
-  static const elevation = DesignTokens.cardElevation;
-  static const splashRadius = DesignTokens.splashRadius;
-  static const textSizeTitle = AppTextSizes.title;
-  static IconThemeData iconTheme(Color color) =>
+  final DesignTokens tokens;
+  const AppThemeTokens(this.tokens);
+  double get radius => AppDimensions.radius;
+  double get padding => AppPadding.horizontal;
+  EdgeInsets get cardMargin => tokens.cardMargin;
+  double get elevation => tokens.cardElevation;
+  double get splashRadius => tokens.splashRadius;
+  double get textSizeTitle => AppTextSizes.title;
+  IconThemeData iconTheme(Color color) =>
       IconThemeData(color: color, size: AppIconSizes.normal);
 }

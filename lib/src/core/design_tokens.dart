@@ -1,50 +1,33 @@
 import 'package:flutter/material.dart';
 
 class DesignTokens {
-  static const double drawerElevation = 8;
-  static const BorderRadius drawerRadius = BorderRadius.horizontal(
-    right: Radius.circular(24),
-  );
-  static const BorderRadius defaultRadius = BorderRadius.all(
-    Radius.circular(12),
-  );
-  static BorderRadius defaultRadiusOnlyBottom = const BorderRadius.vertical(
-    bottom: Radius.circular(12),
-  );
-  static const BorderRadius cardRadius = BorderRadius.all(Radius.circular(12));
-  static const double cardElevation = 4.0;
-  static const EdgeInsets cardMargin = EdgeInsets.symmetric(
-    vertical: 8,
-    horizontal: 16,
-  );
-  // Border radius
-  static const BorderRadius checkboxRadius = BorderRadius.all(
-    Radius.circular(4),
-  );
+  final double drawerElevation;
+  final BorderRadius defaultRadius;
+  final BorderRadius defaultRadiusOnlyBottom;
+  final double cardElevation;
+  final EdgeInsets cardMargin;
+  final BorderRadius checkboxRadius;
+  final double splashRadius;
+  final Size buttonMinSize;
+  final Size buttonMaxSize;
+  const DesignTokens({
+    required this.drawerElevation,
+    required this.defaultRadius,
+    required this.defaultRadiusOnlyBottom,
+    required this.cardElevation,
+    required this.cardMargin,
+    required this.checkboxRadius,
+    required this.splashRadius,
+    required this.buttonMinSize,
+    required this.buttonMaxSize,
+  });
 
-  // Splash effect radius
-  static const double splashRadius = 20;
-
-  // Outline color (shared)
-  static BorderSide outline(ColorScheme colorScheme) =>
-      BorderSide(color: colorScheme.outline);
-
-  // Overlay color for all interactive widgets
-  static Color overlay(ColorScheme colorScheme) =>
-      colorScheme.primary.withAlpha((0.1 * 255).toInt());
-
-  // Disabled fill color
-  static Color disabledFill(ColorScheme colorScheme) =>
-      colorScheme.onSurface.withAlpha((0.38 * 255).toInt());
-  // Default fill color
-  static Color defaultFill(ColorScheme colorScheme) =>
-      colorScheme.onSurface.withAlpha((0.6 * 255).toInt());
-  static Color applyOpacity(Color color, double opacity) =>
-      color.withAlpha((opacity * 255).round());
-  static Color splash(ColorScheme colorScheme) =>
-      applyOpacity(colorScheme.primary, 0.12);
-  static Color hint(ColorScheme colorScheme) =>
-      applyOpacity(colorScheme.onSurface, 0.6);
-  static Color disabled(ColorScheme colorScheme) =>
-      applyOpacity(colorScheme.onSurface, 0.38);
+  BorderSide outline(ColorScheme scheme) => BorderSide(color: scheme.outline);
+  Color overlay(ColorScheme scheme) => scheme.primary.withOpacity(0.1);
+  Color disabledFill(ColorScheme scheme) => scheme.onSurface.withOpacity(0.38);
+  Color defaultFill(ColorScheme scheme) => scheme.onSurface.withOpacity(0.6);
+  Color applyOpacity(Color color, double opacity) => color.withOpacity(opacity);
+  Color splash(ColorScheme scheme) => applyOpacity(scheme.primary, 0.12);
+  Color hint(ColorScheme scheme) => applyOpacity(scheme.onSurface, 0.6);
+  Color disabled(ColorScheme scheme) => applyOpacity(scheme.onSurface, 0.38);
 }

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../mode_theme.dart';
 
-CardThemeData cardThemeData({required ColorScheme colorScheme}) {
+CardThemeData cardThemeData({
+  required ColorScheme colorScheme,
+  required DesignTokens designTokens,
+}) {
   return CardThemeData(
-    margin: DesignTokens.cardMargin,
-    elevation: DesignTokens.cardElevation,
-    shape: RoundedRectangleBorder(borderRadius: DesignTokens.cardRadius),
+    margin: designTokens.cardMargin,
+    elevation: designTokens.cardElevation,
+    shape: RoundedRectangleBorder(borderRadius: designTokens.defaultRadius),
     shadowColor: colorScheme.shadow,
   );
 }
